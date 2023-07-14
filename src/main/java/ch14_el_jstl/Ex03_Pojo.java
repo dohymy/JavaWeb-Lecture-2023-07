@@ -9,24 +9,26 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.jni.Address;
+/**
+ * Servlet implementation class Ex03_Pojo
+ */
+@WebServlet("/ch14/el3")
+public class Ex03_Pojo extends HttpServlet {
 
-@WebServlet("/ch14/jstl2")
-public class Ex12_id_ForEach extends HttpServlet {
-	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Address addr1 = new Address(12345, "수원", "한국");
 		Address addr2 = new Address(67890, "용인", "한국");
-		Member m1 = new Member(101, "김자바", addr1);
-		Member m2 = new Member(102, "박디비", addr2);
-		Member m3 = new Member(102, "제임스", addr2, new Address(98765, "뉴욕", "미국"));
-		Member m4 = new Member(102, "마리아", addr2, new Address(43210, "시카고", "미국"));
+		Member m1 = new Member(101, "제임스", addr1);
+		Member m2 = new Member(102, "마리아", addr2);
 		
-		Member[] members = {m1,m2,m3,m4};
+		request.setAttribute("m1", m1);
+		request.setAttribute("m2", m2);
+		
+		Member[] members = {m1, m2};
 		request.setAttribute("members", members);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/ch14/ex12_if_forEach.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/ch14/ex04_pojo.jsp");
 		rd.forward(request, response);
-		
 	}
+
 }
